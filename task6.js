@@ -1,4 +1,4 @@
-let rate;
+let  rate;
 switch (currency) {
     case "EUR":
         rate = 0.93;
