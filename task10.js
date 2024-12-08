@@ -8,9 +8,16 @@ function secToTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     seconds %= 60;
 
-    const addZero = (num) => (num < 10 ? `0${num}` : num);
-    return `${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`;
+    function addZero(num) {
+        if (num < 10) {
+            return "0" + num;
+        }
+        return num;
+    }
+
+    return addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
 }
+
 
 function dateDiff(h1, m1, s1, h2, m2, s2) {
 
