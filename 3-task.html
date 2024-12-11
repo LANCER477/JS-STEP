@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 03</title>
+    <link rel="stylesheet" href="task3.css">
+
+</head>
+
+<body>
+    Операнд 1: <input id="input1" type="text"> <br />
+    <span id="input1Error" class="error">Введите значение</span> <br />
+    
+    Операнд 2: <input id="input2" type="text"> <br />
+    <span id="input2Error" class="error">Введите значение</span> <br />
+
+    <button id="add-btn">+</button>
+    <button id="rem-btn">-</button>
+    <button id="mul-btn">*</button>
+    <button id="div-btn">/</button>
+    <button id="reset-btn">reset</button>
+<style>
+    input.error-border {
+    border-color: red;
+    border-width: 2px;
+}
+
+
+.error {
+    color: red;
+    display: none;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+</style>
+    <script>
+        /*
+        Задание:
+        Внесите правки в данный сценарий.
+        Добавьте обработчик на клик по кнопке reset. При клике значения, введённые в поля ввода "Операнд 1"
+        и "Операнд 2", должны быть заменены на значения 0
+        Добавьте проверку перед выполнением любой арифметической операции. Если поле ввода пустое, сделайте
+        для этого поля ввода красную рамку и сделайте видимый элемент с ошибкой под этим полем ввода.
+        Для поля ввода input1 при отсутствии значения сделайте видимым span #input1Error для поля ввода
+        input2 сделайте, в случае ошибки, #input2Error видимым.
+        */
+        let input1 = document.getElementById("input1");
+        let input2 = document.getElementById("input2");
+        let input1Error = document.getElementById("input1Error");
+        let input2Error = document.getElementById("input2Error");
+
+        let addBtn = document.getElementById("add-btn");
+        let remBtn = document.getElementById("rem-btn");
+        let mulBtn = document.getElementById("mul-btn");
+        let divBtn = document.getElementById("div-btn");
+        let resetBtn = document.getElementById("reset-btn");
+
+        
+        function validateInputs() {
+            let isValid = true;
+
+           
+            if (input1.value.trim() === "") {
+                input1Error.style.display = "block"; 
+                input1.classList.add("error-border"); 
+                isValid = false;
+            } else {
+                input1Error.style.display = "none"; 
+                input1.classList.remove("error-border"); 
+            }
+
+            
+            if (input2.value.trim() === "") {
+                input2Error.style.display = "block"; 
+                input2.classList.add("error-border"); 
+                isValid = false;
+            } else {
+                input2Error.style.display = "none";
+                input2.classList.remove("error-border"); 
+            }
+
+            return isValid;
+        }
+
+       
+        addBtn.addEventListener("click", function () {
+            if (validateInputs()) {
+                alert(Number(input1.value) + Number(input2.value));
+            }
+        });
+
+        remBtn.addEventListener("click", function () {
+            if (validateInputs()) {
+                alert(Number(input1.value) - Number(input2.value));
+            }
+        });
+
+        mulBtn.addEventListener("click", function () {
+            if (validateInputs()) {
+                alert(Number(input1.value) * Number(input2.value));
+            }
+        });
+
+        divBtn.addEventListener("click", function () {
+            if (validateInputs()) {
+            
+                if (Number(input2.value) === 0) {
+                    alert("404");
+                } else {
+                    alert(Number(input1.value) / Number(input2.value));
+                }
+            }
+        });
+
+    
+        resetBtn.addEventListener("click", function () {
+            input1.value = "";
+            input2.value = "";
+            input1Error.style.display = "none"; 
+            input2Error.style.display = "none"; 
+            input1.classList.remove("error-border"); 
+            input2.classList.remove("error-border"); 
+        });
+    </script>
+</body>
+
+</html>
