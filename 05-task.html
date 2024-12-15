@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 05</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #userList {
+            width: 200px;
+            display: inline-block;
+        }
+        #userList>li {
+            cursor: pointer;
+            list-style: none;
+        }
+
+        #userList>li:hover {
+            background-color: rgb(35, 202, 71);
+        }
+
+        #output {
+            display: inline-block;
+            border:1px solid rgb(0, 0, 0);
+            padding: 10px;
+            vertical-align: top;
+            margin-top: 20px;
+            width: 300px;
+            min-height: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="userList">
+
+    </ul>
+
+    <div id="output"></div>
+    <script>
+        /*
+        Задание:
+        Доработайте сценарий.
+        Сделайте так, чтобы при наведении на имя пользователя в списке, в div#output отображались 
+        возраст (age)(добавить к каждому объекту!), баланс (balance), компания (company) и email данного пользователя
+        */
+
+        let users = [
+            {
+                name: { first: 'Max', last: 'Maxes', email: 'max@gmail.com' },
+                age: 29,
+                balance: "$2,345.50",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'Bob', last: 'Bobinson', email: 'bob47@gmail.com' },
+                age: 34,
+                balance: "$3,120.00",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'Albert', last: 'Albert2', email: 'albert@gmail.com' },
+                age: 42,
+                balance: "$5,980.75",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'John', last: 'Snow', email: 'snow@gmail.com' },
+                age: 36,
+                balance: "$0",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'Robert', last: 'Baratheon', email: 'robert@gmail.com' },
+                age: 28,
+                balance: "$1,720.40",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'Ivan', last: 'Snow', email: 'ivan@gmail.com' },
+                age: 39,
+                balance: "$4,235.00",
+                company: "4epuha"
+            },
+            {
+                name: { first: 'Sam', last: 'Who', email: 'sam@gmail.com' },
+                age: 31,
+                balance: "$2,890.10",
+                company: "4epuha"
+            }
+        ];
+
+        function displayUserDetails(event) {
+            const userIndex = event.target.dataset.index;
+            const user = users[userIndex]; 
+            const outputDiv = document.querySelector("#output");
+
+            outputDiv.innerHTML = `
+                <h3>Данные пользователя:</h3>
+                <p>Имя: ${user.name.first} ${user.name.last}</p>
+                <p>Возраст: ${user.age}</p>
+                <p>Баланс: ${user.balance}</p>
+                <p>Компания: ${user.company}</p>
+                <p>Email: ${user.name.email}</p>
+            `;
+        }
+
+        const userList = document.querySelector("#userList");
+       
+        users.forEach((user, index) => {
+            let li = document.createElement("li");
+            li.textContent = user.name.first + " " + user.name.last; 
+            li.dataset.index = index; 
+            li.addEventListener("mouseenter", displayUserDetails); 
+            userList.appendChild(li); 
+            
+        });
+    </script>
+</body>
+
+</html>
