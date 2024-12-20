@@ -31,12 +31,28 @@
             font-weight: bold;
         }
         input[type="text"] {
-            width: 100%;
+            width: calc(100% - 100px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            display: inline-block;
         }
-        button {
+        button.adjust {
+            width: 90px;
+            padding: 10px;
+            margin-left: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        button.adjust:hover {
+            background-color: #0056b3;
+        }
+        button.save {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -46,7 +62,7 @@
             font-size: 16px;
             cursor: pointer;
         }
-        button:hover {
+        button.save:hover {
             background-color: #218838;
         }
         .rectangle {
@@ -65,10 +81,14 @@
         <div class="form-group">
             <label for="width">Width:</label>
             <input type="text" id="width" placeholder="Enter width (e.g., 200px)">
+            <button class="adjust" onclick="incrementWidth(10)">+10px</button>
+            <button class="adjust" onclick="incrementWidth(-10)">-10px</button>
         </div>
         <div class="form-group">
             <label for="height">Height:</label>
             <input type="text" id="height" placeholder="Enter height (e.g., 100px)">
+            <button class="adjust" onclick="incrementHeight(10)">+10px</button>
+            <button class="adjust" onclick="incrementHeight(-10)">-10px</button>
         </div>
         <div class="form-group">
             <label for="colorName">Color Name:</label>
@@ -78,7 +98,7 @@
             <label for="colorCode">RGB Color Code:</label>
             <input type="text" id="colorCode" placeholder="Enter RGB code (e.g., 255,0,0)">
         </div>
-        <button onclick="createRectangle()">Save</button>
+        <button class="save" onclick="createRectangle()">Save</button>
 
         <div id="rectangleOutput"></div>
     </div>
@@ -95,6 +115,20 @@
             serialize() {
                 return JSON.stringify(this);
             }
+        }
+
+        function incrementWidth(amount) {
+            const widthInput = document.getElementById('width');
+            let widthValue = parseInt(widthInput.value.replace('px', '')) || 0;
+            widthValue = Math.max(0, widthValue + amount);
+            widthInput.value = `${widthValue}px`;
+        }
+
+        function incrementHeight(amount) {
+            const heightInput = document.getElementById('height');
+            let heightValue = parseInt(heightInput.value.replace('px', '')) || 0;
+            heightValue = Math.max(0, heightValue + amount);
+            heightInput.value = `${heightValue}px`;
         }
 
         function createRectangle() {
