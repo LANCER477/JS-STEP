@@ -42,6 +42,14 @@
         </div>
     </template>
 
+    <template id="productWithDiscount">
+        <div>
+            <div class="bg" style="background-image: url('{{imagePath}}');"></div>
+            <p class="original-price">{{originalPrice}}$</p>
+            <p class="discounted-price">{{discountedPrice}}$</p>
+        </div>
+    </template>
+
     <script src="mustache.min.js"></script>
 
     <script>
@@ -82,6 +90,18 @@
             }
         }
 
+        class ProductWithDiscount extends Product {
+            originalPrice;
+            discountedPrice;
+
+            constructor(imagePath, price, discount) {
+                super(imagePath, price);
+                this.originalPrice = price.toFixed(2);
+                this.discountedPrice = (price - (price * discount / 100)).toFixed(2);
+                this.template = document.querySelector("#productWithDiscount").innerHTML;
+            }
+        }
+
         class Advertisement extends CatalogItem {
             url;
 
@@ -100,6 +120,10 @@
             }
 
             add(item) {
+                if (!(item instanceof CatalogItem)) {
+                    alert("404");
+                    return;
+                }
                 this.items.push(item);
             }
 
@@ -109,17 +133,16 @@
                 });
             }
         }
+let catalog = new Catalog("#catalog");
 
-        let catalog = new Catalog("#catalog");
+catalog.add(new Product("images/img1.jpg", 35.55));
+catalog.add(new Product("images/img2.jpg", 25.25));
+catalog.add(new Advertisement("images/banner1.jpg", "https://itvdn.com/ru/catalog"));
+catalog.add(new Product("images/img3.jpg", 14.55));
+catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20)); 
+catalog.add(new Advertisement("images/banner2.jpg", "https://itvdn.comru/ru/specialities"));
 
-        catalog.add(new Product("images/img1.jpg", 35.55));
-        catalog.add(new Product("images/img2.jpg", 25.25));
-        catalog.add(new Advertisement("images/banner1.jpg", "https://itvdn.com/ru/catalog"));
-        catalog.add(new Product("images/img3.jpg", 14.55));
-        catalog.add(new Product("images/img4.jpg", 65.55));
-        catalog.add(new Advertisement("images/banner2.jpg", "https://itvdn.comru/ru/specialities"));
-
-        catalog.show();
+ catalog.show();
 
     </script>
 </body>
