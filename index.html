@@ -3,159 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Color Rectangle</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: calc(100% - 100px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        button.adjust {
-            width: 90px;
-            padding: 10px;
-            margin-left: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        button.adjust:hover {
-            background-color: #0056b3;
-        }
-        button.save {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button.save:hover {
-            background-color: #218838;
-        }
-        .rectangle {
-            margin-top: 20px;
-            padding: 10px;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <h1>Create New Color</h1>
         <div class="form-group">
-            <label for="width">Width:</label>
-            <input type="text" id="width" placeholder="Enter width (e.g., 200px)">
-            <button class="adjust" onclick="incrementWidth(10)">+10px</button>
-            <button class="adjust" onclick="incrementWidth(-10)">-10px</button>
+            <label for="width">Width (px):</label>
+            <input type="number" id="width" placeholder="Enter width">
         </div>
         <div class="form-group">
-            <label for="height">Height:</label>
-            <input type="text" id="height" placeholder="Enter height (e.g., 100px)">
-            <button class="adjust" onclick="incrementHeight(10)">+10px</button>
-            <button class="adjust" onclick="incrementHeight(-10)">-10px</button>
+            <label for="height">Height (px):</label>
+            <input type="number" id="height" placeholder="Enter height">
         </div>
         <div class="form-group">
             <label for="colorName">Color Name:</label>
             <input type="text" id="colorName" placeholder="Enter color name (e.g., Red)">
         </div>
         <div class="form-group">
-            <label for="colorCode">RGB Color Code:</label>
-            <input type="text" id="colorCode" placeholder="Enter RGB code (e.g., 255,0,0)">
+            <label>Color Type:</label>
+            <div class="color-type-panel">
+                <button>RGB</button>
+                <button>HEX</button>
+                <button>RGBA</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>RGB Color Code:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="number" id="colorR" placeholder="R (0-255)" min="0" max="255">
+                <input type="number" id="colorG" placeholder="G (0-255)" min="0" max="255">
+                <input type="number" id="colorB" placeholder="B (0-255)" min="0" max="255">
+            </div>
         </div>
         <button class="save" onclick="createRectangle()">Save</button>
 
         <div id="rectangleOutput"></div>
     </div>
 
-    <script>
-        class Rectangle {
-            constructor(width, height, colorName, colorCode) {
-                this.width = width;
-                this.height = height;
-                this.colorName = colorName;
-                this.colorCode = colorCode;
-            }
 
-            serialize() {
-                return JSON.stringify(this);
-            }
-        }
-
-        function incrementWidth(amount) {
-            const widthInput = document.getElementById('width');
-            let widthValue = parseInt(widthInput.value.replace('px', '')) || 0;
-            widthValue = Math.max(0, widthValue + amount);
-            widthInput.value = `${widthValue}px`;
-        }
-
-        function incrementHeight(amount) {
-            const heightInput = document.getElementById('height');
-            let heightValue = parseInt(heightInput.value.replace('px', '')) || 0;
-            heightValue = Math.max(0, heightValue + amount);
-            heightInput.value = `${heightValue}px`;
-        }
-
-        function createRectangle() {
-            const width = document.getElementById('width').value;
-            const height = document.getElementById('height').value;
-            const colorName = document.getElementById('colorName').value;
-            const colorCode = document.getElementById('colorCode').value;
-
-            if (!width || !height || !colorName || !colorCode) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-            const rectangle = new Rectangle(width, height, colorName, colorCode);
-            console.log('Serialized Rectangle:', rectangle.serialize());
-
-            const rectangleDiv = document.createElement('div');
-            rectangleDiv.className = 'rectangle';
-            rectangleDiv.style.width = width;
-            rectangleDiv.style.height = height;
-            rectangleDiv.style.backgroundColor = `rgb(${colorCode})`;
-            rectangleDiv.textContent = `${colorName} (${colorCode})`;
-
-            const output = document.getElementById('rectangleOutput');
-            output.innerHTML = '';
-            output.appendChild(rectangleDiv);
-        }
-    </script>
+    <script src="site.js"></script>
 </body>
 </html>
