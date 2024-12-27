@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating</title>
+    <style>
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+            font-size: 30px; 
+        }
+        .star {
+            cursor: pointer;
+            color: black; 
+        }
+        .star.active {
+            color: orange; 
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".star").click(function () {
+                const index = $(this).index(); 
+                $(".star").each(function (i) {
+                    $(this).toggleClass("active", i <= index); 
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Star Rating:</h2>
+    <div class="star-rating">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+    </div>
+</body>
+</html>

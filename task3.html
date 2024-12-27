@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .button-red {
+            background-color: #f28b82;
+            color: white;
+        }
+
+        .button-green {
+            background-color: #81c995;
+            color: white;
+        }
+
+        .button-orange {
+            background-color: #fbbc04;
+            color: white;
+        }
+
+        .button-yellow {
+            background-color: #fdd663;
+            color: white;
+        }
+
+        .fruits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .fruit {
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .fruit-red {
+            background-color: #f28b82;
+        }
+
+        .fruit-green {
+            background-color: #81c995;
+        }
+
+        .fruit-orange {
+            background-color: #fbbc04;
+        }
+
+        .fruit-yellow {
+            background-color: #fdd663;
+        }
+
+        .highlight {
+            box-shadow: 0 0 10px 5px rgba(200, 3, 3, 0.3);
+        }
+    </style>
+    <script>
+        function highlightFruits(color) {
+            document.querySelectorAll('.fruit').forEach(fruit => {
+                fruit.classList.remove('highlight');
+                if (fruit.classList.contains(`fruit-${color}`)) {
+                    fruit.classList.add('highlight');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div class="button-container">
+        <button class="button-red" onclick="highlightFruits('red')">Red</button>
+        <button class="button-green" onclick="highlightFruits('green')">Green</button>
+        <button class="button-orange" onclick="highlightFruits('orange')">Orange</button>
+        <button class="button-yellow" onclick="highlightFruits('yellow')">Yellow</button>
+    </div>
+
+    <h2>Fruits:</h2>
+    <div class="fruits">
+        <div class="fruit fruit-red">apple</div>
+        <div class="fruit fruit-green">pear</div>
+        <div class="fruit fruit-orange">orange</div>
+        <div class="fruit fruit-red">mango</div>
+        <div class="fruit fruit-orange">mandarin</div>
+        <div class="fruit fruit-yellow">pineapple</div>
+        <div class="fruit fruit-green">avocado</div>
+        <div class="fruit fruit-red">red pepper</div>
+        <div class="fruit fruit-green">green pepper</div>
+    </div>
+
+</body>
+</html>
